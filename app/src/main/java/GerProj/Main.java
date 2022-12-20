@@ -25,7 +25,7 @@ public class Main {
      ProjectController projectController = new ProjectController();
      
      Project project = new Project();
-     project.setName("Projeto Teste 2");    
+     project.setName("Projeto Teste 24");    
      project.setDescription("Ana ligia");
     // project.setCreatedAt(new Date());
      project.setUpdatedAt(new Date());
