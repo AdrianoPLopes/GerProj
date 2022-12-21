@@ -22,36 +22,51 @@ public class Main {
         System.out.println(new Main().getGreeting());
         
       
-     ProjectController projectController = new ProjectController();
+    ProjectController projectController = new ProjectController();
      
      Project project = new Project();
-     project.setName("Projeto Teste 24");    
-     project.setDescription("Ana ligia");
-    // project.setCreatedAt(new Date());
+     project.setName("Projeto Teste 02 ");    
+     project.setDescription("Adriano");
+     project.setCreatedAt(new Date());
      project.setUpdatedAt(new Date());
-      projectController.save(project);
+     projectController.save(project);
             
-            System.out.println("teste do erro");
-          //  project.setId(5);
-          //  project.setName("Adriano Dezembro");
-         //   project.setDescription("Description");
-        //    project.setCreatedAt(new Date());
-        //    project.setUpdatedAt(new Date());
-        //    projectController.update(project);
+    //System.out.println("teste do erro");
+    project.setId(15);
+    project.setName("Adriano Dezembro");
+    project.setDescription("Description");
+    project.setCreatedAt(new Date());
+    project.setUpdatedAt(new Date());
+    projectController.update(project);
             
-            System.out.println("Projeto atualizado");
+    System.out.println("Projeto atualizado");
             
-           // List<Project> projects = projectController.getAll();
-            //System.out.println("Total de Projetos = " +projects.size());
+    List<Project> projects = projectController.getAll();
+    System.out.println("Total de Projetos = " +projects.size());
             
             
-            //TaskController taskController = new TaskController();
+    TaskController taskController = new TaskController();
             
-            //Task task = new Task();
-            //task.setIdProject(2);
-            //task.setName("Criar tela de aplicação");
-           // task.setDescription("Devem ser criadas as telas para cadastros");
-            //task.setNotes("Sem notas");
+    Task task = new Task();
+    task.setIdProject(14);
+    task.setName("Criar tela de aplicação");
+    task.setDescription("Devem ser criadas as telas para cadastros");
+    task.setNotes("Sem notas");
+    task.setIsCompleted(false);
+    task.setDeadLine(new Date());
+    task.setCreatedAt(new Date());
+    task.setUpdatedAt(new Date());
+     System.out.println("Teste da main pra save task") ;      
+    
+    taskController.save(task);
+    
+    System.out.println("Teste de save Tasks com sucesso");
+            
+    //task.setName("Alterar telas de aplicação");
+    //taskController.update(task);
+    //List<Task> tasks = taskController.getAll(12);
+    //System.out.println("Totel de tarefas = "  +tasks.size());
+           
             
             
        

@@ -7,6 +7,7 @@ package view;
 import GerProj.controller.ProjectController;
 import GerProj.model.Project;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -149,18 +150,23 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
 
     private void jLabelProjectAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelProjectAddMouseClicked
         
-               
+                         
         try {
             Project project = new Project();
         project.setName(jTextFieldProjectName.getText());
         project.setDescription(jTextAreaProjectDescription.getText());
-            controller.save(project);
+        project.setCreatedAt(new Date());
+        project.setUpdatedAt(new Date());
+        
+        
+           
+        controller.save(project);
             
             JOptionPane.showMessageDialog(rootPane, "Projeto Salvo com Sucesso.");
-            
-                      
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+         
+                    
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
         this.dispose();
         

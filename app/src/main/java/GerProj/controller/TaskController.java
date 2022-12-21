@@ -15,7 +15,9 @@ import java.util.List;
 
 public class TaskController {
     
+        
     public void save(Task task) throws SQLException{
+        
         
         String sql = "INSERT INTO tasks(idProject,"
                 + "name,"
@@ -24,26 +26,33 @@ public class TaskController {
                 + "notes,"
                 + "deadLine,"
                 + "createdAt,"
-                +"updatedAt) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-        
+                + "updatedAt)"
+                + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+               
         Connection conn = null;
         PreparedStatement statement = null;
         
         try {
             conn = ConnectionFactory.getConnection();
             statement  = conn.prepareStatement(sql);
+            
+            
+            
             statement.setInt(1, task.getIdProject());
             statement.setString(2, task.getName());
             statement.setString(3, task.getDescription());
-            statement.setBoolean(4, task.isIsCompleted());
+            statement.setBoolean(4, task.getIsCompleted());            
             statement.setString(5, task.getNotes());
             statement.setDate(6, new Date(task.getDeadLine().getTime()));
             statement.setDate(7, new Date(task.getCreatedAt().getTime()));
-            statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
+            statement.setDate(8, new Date(task.getUpdatedAt().getTime()));            
+            
+            
             statement.execute();
             
-        } catch (Exception e) {
-            throw new RuntimeException("Erro ao salvar a tarefa", e);
+            
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro ao salvar a tarefa. ", ex);
         } finally {
             ConnectionFactory.closeConnection(conn, statement);
             
@@ -88,7 +97,7 @@ public class TaskController {
                     //executando a query
                     statement.execute();
                     
-        } catch (Exception e) {
+        } catch (SQLException e) {
             throw new RuntimeException("Erro ao atualizar a tarefa", e);
         }
                 
@@ -112,7 +121,7 @@ public class TaskController {
             //executando a query
             statement.execute();
                         
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
             throw new RuntimeException("Erro ao deletar a tarefa" + ex.getMessage());
         } finally {
             ConnectionFactory.closeConnection(conn, statement);
@@ -130,7 +139,8 @@ public class TaskController {
         ResultSet resultSet = null;
         
         //Lista de tarefas que será devolvida quando a chamada do metodo acontecer
-        List<Task> tasks = new ArrayList<Task>();
+        List<Task> tasks = new ArrayList();
+        //redundante new ArrayList<Task>
         
         try {
             //criação de concexão
@@ -159,7 +169,7 @@ public class TaskController {
             }
             
             
-        } catch (Exception ex) {
+        } catch (SQLException ex) {
              throw new RuntimeException("Erro ao deletar a tarefa" + ex.getMessage());
         } finally {
             ConnectionFactory.closeConnection(conn, statement, resultSet);
