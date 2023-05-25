@@ -114,9 +114,20 @@ public class Task {
         return "Task{" + "id=" + id + ", idProject=" + idProject + ", name=" + name + ", description=" + description + ", notes=" + notes + ", isCompleted=" + isCompleted + ", deadLine=" + deadLine + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
 
-    public boolean isIsCompleted() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    public boolean isCompleted() {
+       //try {
+       return isCompleted;
+       //    throw new UnsupportedOperationException("Not supported yet.");  
+    } //catch (UnsupportedOperationException e){
+        //System.out.println("Operação não suportada" + e.getMessage());
+        //return false;
+    
+        
+        
+// Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     
     
-}
+    
+        }
+   // }
+//}

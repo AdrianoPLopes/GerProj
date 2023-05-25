@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class TaskController {
@@ -24,7 +26,7 @@ public class TaskController {
                 + "description,"
                 + "completed,"
                 + "notes,"
-                + "deadLine,"
+                + "deadline,"
                 + "createdAt,"
                 + "updatedAt)"
                 + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
@@ -52,7 +54,7 @@ public class TaskController {
             
             
         } catch (SQLException ex) {
-            throw new RuntimeException("Erro ao salvar a tarefa. ", ex);
+            throw new RuntimeException("Erro ao salvar a tarefa: "+ ex.getMessage(), ex);
         } finally {
             ConnectionFactory.closeConnection(conn, statement);
             
@@ -70,9 +72,9 @@ public class TaskController {
                 + "description = ?,"
                 + "notes = ?, "
                 + "completed = ?,"
-                + "deadLine = ?, "
+                + "deadline = ?, "
                 + "createdAt = ?, "
-                + "updatedAt = ?,"
+                + "updatedAt = ?"
                 + "WHERE id = ?";
                 
             Connection conn = null;
@@ -89,7 +91,7 @@ public class TaskController {
                     statement.setString(2, task.getName());
                     statement.setString(3, task.getDescription());
                     statement.setString(4, task.getNotes());
-                    statement.setBoolean(5, task.isIsCompleted());
+                    statement.setBoolean(5, task.isCompleted());
                     statement.setDate(6, new Date(task.getDeadLine().getTime()));
                     statement.setDate(7, new Date(task.getCreatedAt().getTime()));
                     statement.setDate(8, new Date(task.getUpdatedAt().getTime()));
@@ -104,7 +106,7 @@ public class TaskController {
         
     }
     
-    public void removeById(int taskId) throws SQLException{
+    public void removeById(int taskId)  {
         String sql = "DELETE FROM tasks WHERE id = ?";
         
         Connection conn = null;
@@ -118,7 +120,8 @@ public class TaskController {
             statement = conn.prepareStatement(sql);
             //setando os valores do statement
             statement.setInt(1, taskId);
-            //executando a query
+            System.out.println(taskId);
+//executando a query
             statement.execute();
                         
         } catch (SQLException ex) {
@@ -127,19 +130,24 @@ public class TaskController {
             ConnectionFactory.closeConnection(conn, statement);
             
             if(statement != null) {
-                statement.close();
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(TaskController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
     
     public List<Task> getAll(int idProject){
-        String sql = "SELECT * FROM task WHERE idProject = ?";
+        String sql = "SELECT * FROM tasks WHERE idProject = ?";
+        List<Task> tasks = new ArrayList<>();
         Connection conn = null;
         PreparedStatement statement = null;
         ResultSet resultSet = null;
         
         //Lista de tarefas que será devolvida quando a chamada do metodo acontecer
-        List<Task> tasks = new ArrayList();
+        
         //redundante new ArrayList<Task>
         
         try {
@@ -155,29 +163,30 @@ public class TaskController {
             while(resultSet.next()){
              
                 Task task = new Task();
+                
                 task.setId(resultSet.getInt("id"));
                 task.setIdProject(resultSet.getInt("idProject"));
+                System.out.println(idProject);
                 task.setName(resultSet.getString("name"));
                 task.setDescription(resultSet.getString("description"));
-                task.setNotes(resultSet.getString("Notes"));
+                task.setNotes(resultSet.getString("notes"));
                 task.setIsCompleted(resultSet.getBoolean("completed"));
-                task.setDeadLine(resultSet.getDate("deadLine"));
+                task.setDeadLine(resultSet.getDate("deadline"));
                 task.setCreatedAt(resultSet.getDate("createdAt"));
-                task.setUpdatedAt(resultSet.getDate("updatesAt"));
+                task.setUpdatedAt(resultSet.getDate("updatedAt"));
+               
+                
                 tasks.add(task);
                 
             }
             
             
         } catch (SQLException ex) {
-             throw new RuntimeException("Erro ao deletar a tarefa" + ex.getMessage());
+             throw new RuntimeException("Erro ao buscar as tarefas" + ex.getMessage());
         } finally {
             ConnectionFactory.closeConnection(conn, statement, resultSet);
         }
-        
-        
-        
-        
+                     
         //Lista de tarefas que foi criada e carregada
         return tasks;
     }

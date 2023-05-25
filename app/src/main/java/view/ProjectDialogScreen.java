@@ -152,23 +152,23 @@ public class ProjectDialogScreen extends javax.swing.JDialog {
         
                          
         try {
+            if (!jTextFieldProjectName.getText().equals("")){
             Project project = new Project();
         project.setName(jTextFieldProjectName.getText());
         project.setDescription(jTextAreaProjectDescription.getText());
         project.setCreatedAt(new Date());
-        project.setUpdatedAt(new Date());
-        
-        
-           
-        controller.save(project);
-            
-            JOptionPane.showMessageDialog(rootPane, "Projeto Salvo com Sucesso.");
-         
+        project.setUpdatedAt(new Date());  
+         controller.save(project);
+         JOptionPane.showMessageDialog(rootPane, "Projeto Salvo com Sucesso.");
+           this.dispose();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Projeto não Salvo, NOME obrigatório´");
+                }
                     
         } catch (Exception e) {
             JOptionPane.showMessageDialog(rootPane, e.getMessage());
         }
-        this.dispose();
+        
         
     }//GEN-LAST:event_jLabelProjectAddMouseClicked
 
