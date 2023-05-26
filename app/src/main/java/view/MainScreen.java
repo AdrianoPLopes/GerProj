@@ -352,11 +352,13 @@ public class MainScreen extends javax.swing.JFrame {
 
     private void jLabelTaskAddMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelTaskAddMouseClicked
 
-        TaskDialogScreen taskDialogScreen = new TaskDialogScreen(this, rootPaneCheckingEnabled);
-       
         int projectIndex = jListProjects.getSelectedIndex();
         Project project = (Project) projectsModel.get(projectIndex);
-        taskDialogScreen.setProject(project);
+        
+        TaskDialogScreen taskDialogScreen = new TaskDialogScreen(this, rootPaneCheckingEnabled, new Task(), project);
+       
+        
+        
         
         taskDialogScreen.setVisible(true);
         
@@ -374,9 +376,11 @@ public class MainScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         int rowIndex = jTableTasks.rowAtPoint(evt.getPoint());
         int columnIndex = jTableTasks.columnAtPoint(evt.getPoint());
+        int projectIndex = jListProjects.getSelectedIndex();
+        Project project = (Project) projectsModel.get(projectIndex);
         Task task = taskModel.getTasks().get(rowIndex);
        //if (rowIndex>= 0 && rowIndex <jTableTasks.getRowCount()){
-             
+          
         switch(columnIndex) {           
                               
                 case 3:
@@ -388,9 +392,15 @@ public class MainScreen extends javax.swing.JFrame {
                     break;    
                     
                 case 4:
-                //Task task =taskModel.getTasks().get(rowIndex);
-                
-                    
+                 
+                TaskDialogScreen taskDialogScreen = new TaskDialogScreen(this, rootPaneCheckingEnabled, task, project);
+               
+                    System.out.println("o row index é: " + task);
+                 taskDialogScreen.setVisible(true);  //abre a tela cadastro pra edição da task
+                    //System.out.println("o id do projeto é:" + idPro);
+                                 
+                    loadTasks(project.getId());
+                   
                 break;
                 
                 case 5:
@@ -398,8 +408,8 @@ public class MainScreen extends javax.swing.JFrame {
                     taskController.removeById(task.getId());
                     taskModel.getTasks().remove(task);
                     
-                    int projectIndex = jListProjects.getSelectedIndex();
-                    Project project = (Project) projectsModel.get(projectIndex);
+                     projectIndex = jListProjects.getSelectedIndex();
+                    //Project project = (Project) projectsModel.get(projectIndex);
                     loadTasks(project.getId());
                 default: 
                     

@@ -56,7 +56,7 @@
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
                   <Component id="jLabelTask" min="-2" pref="156" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
-                  <Component id="jLabelTaskAdd" min="-2" pref="58" max="-2" attributes="0"/>
+                  <Component id="btnSave" min="-2" pref="58" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -68,7 +68,7 @@
                   <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <Component id="jLabelTaskAdd" max="32767" attributes="0"/>
+                  <Component id="btnSave" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -86,14 +86,14 @@
             <Property name="text" type="java.lang.String" value="Tarefa"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabelTaskAdd">
+        <Component class="javax.swing.JLabel" name="btnSave">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/add-icon-png-2459.png"/>
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jLabelTaskAddMouseClicked"/>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSaveMouseClicked"/>
           </Events>
         </Component>
       </SubComponents>
@@ -112,13 +112,13 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jLabelTaskName" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jTextFieldTaskName" alignment="0" max="32767" attributes="0"/>
+                      <Component id="edtNome" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabelTaskDescription" alignment="0" max="32767" attributes="0"/>
                       <Component id="jScrollPaneTaskDescription" alignment="0" pref="388" max="32767" attributes="0"/>
                       <Component id="jLabelTaskDeadline" alignment="0" max="32767" attributes="0"/>
                       <Component id="jLabelTaskNote" alignment="0" max="32767" attributes="0"/>
                       <Component id="jScrollPaneTaskNote" alignment="0" max="32767" attributes="0"/>
-                      <Component id="jFormattedTextFielddeadLine" alignment="0" max="32767" attributes="0"/>
+                      <Component id="edtPrazo" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -130,7 +130,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabelTaskName" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jTextFieldTaskName" min="-2" max="-2" attributes="0"/>
+                  <Component id="edtNome" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabelTaskDescription" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -138,7 +138,7 @@
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabelTaskDeadline" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
-                  <Component id="jFormattedTextFielddeadLine" min="-2" max="-2" attributes="0"/>
+                  <Component id="edtPrazo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabelTaskNote" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -154,14 +154,15 @@
             <Property name="text" type="java.lang.String" value="Nome"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jTextFieldTaskName">
+        <Component class="javax.swing.JTextField" name="edtNome">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Segoe UI" size="14" style="0"/>
             </Property>
+            <Property name="name" type="java.lang.String" value="edtNome" noResource="true"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextFieldTaskNameActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="edtNomeActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabelTaskDescription">
@@ -176,7 +177,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextAreaDescription">
+            <Component class="javax.swing.JTextArea" name="edtDescricao">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -204,7 +205,7 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextAreaNotes">
+            <Component class="javax.swing.JTextArea" name="edtNotes">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -215,7 +216,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JFormattedTextField" name="jFormattedTextFielddeadLine">
+        <Component class="javax.swing.JFormattedTextField" name="edtPrazo">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
               <Format subtype="1" type="1"/>
